@@ -45,3 +45,12 @@ Run unit tests:
 ```bash
 python -m unittest discover -s tests -p 'test_*.py' -v
 ```
+
+
+## Webapp (GitHub/Codespaces friendly)
+Run the browser UI locally:
+```bash
+pip install -r requirements.txt
+python app.py
+```
+Then open `http://localhost:8000`.

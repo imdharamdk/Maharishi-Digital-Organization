@@ -69,3 +69,11 @@ A complete AGI that can independently run an entire organization is not realisti
 
 ## License
 Apache licence
+
+
+## Run the Agent Webapp
+```bash
+pip install -r requirements.txt
+python app.py
+```
+Open: `http://localhost:8000`
