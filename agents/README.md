@@ -51,6 +51,6 @@ python -m unittest discover -s tests -p 'test_*.py' -v
 Run the browser UI locally:
 ```bash
 pip install -r requirements.txt
-python app.py
+PORT=8000 python app.py
 ```
-Then open `http://localhost:8000`.
+Then open `http://localhost:8000` (or `/preview`).

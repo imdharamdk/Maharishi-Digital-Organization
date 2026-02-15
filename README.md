@@ -74,6 +74,6 @@ Apache licence
 ## Run the Agent Webapp
 ```bash
 pip install -r requirements.txt
-python app.py
+PORT=8000 python app.py
 ```
-Open: `http://localhost:8000`
+Open: `http://localhost:8000` (or `/preview` path if your preview tool uses it).

@@ -24,6 +24,32 @@ class WebAppTests(unittest.TestCase):
             body = resp.read().decode("utf-8")
         self.assertIn("Maharishi Mission Agents", body)
 
+    def test_preview_path_get(self):
+        with request.urlopen(f"http://127.0.0.1:{self.port}/preview") as resp:
+            body = resp.read().decode("utf-8")
+        self.assertIn("Maharishi Mission Agents", body)
+
+    def test_preview_path_post(self):
+        payload = parse.urlencode(
+            {
+                "agent": "operations",
+                "request_id": "T3",
+                "date": "2026-02-15",
+                "requested_by": "QA",
+                "priority": "High",
+                "goal": "Test preview post",
+                "context": "Ctx",
+                "constraints": "None",
+                "structured_data": "Owner: A; Due: Tomorrow",
+                "unstructured_notes": "Notes",
+                "output_format": "markdown",
+            }
+        ).encode("utf-8")
+        req = request.Request(f"http://127.0.0.1:{self.port}/preview", data=payload, method="POST")
+        with request.urlopen(req) as resp:
+            body = resp.read().decode("utf-8")
+        self.assertIn("Operations Agent Response", body)
+
     def test_home_post_all(self):
         payload = parse.urlencode(
             {

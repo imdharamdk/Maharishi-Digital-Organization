@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import html
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import parse_qs
+from urllib.parse import parse_qs, urlparse
 
 from agents.runtime.cli import _run_single
 from agents.runtime.implementations import AGENT_REGISTRY
 from agents.runtime.models import TaskIntake
+
+HOME_PATHS = {"/", "/index.html", "/preview", "/preview/"}
 
 
 def _to_bool(form: dict[str, list[str]], key: str) -> bool:
@@ -38,7 +41,7 @@ def _build_intake(form: dict[str, list[str]], agent: str) -> TaskIntake:
 
 
 def render_page(result: str = "") -> str:
-    options = ''.join([f'<option value="{k}">{k}</option>' for k in AGENT_REGISTRY])
+    options = "".join([f'<option value="{k}">{k}</option>' for k in AGENT_REGISTRY])
     output_block = f"<h2>Output</h2><pre>{html.escape(result)}</pre>" if result else ""
     return f"""<!doctype html>
 <html><head><meta charset='utf-8'><title>Maharishi Agents Webapp</title>
@@ -47,10 +50,12 @@ body {{ font-family: Arial; max-width: 1000px; margin: 1rem auto; padding: 0 1re
 textarea,input,select {{ width: 100%; margin: .25rem 0 .75rem; padding: .5rem; }}
 pre {{ background:#111; color:#f5f5f5; padding:1rem; border-radius:8px; white-space:pre-wrap; }}
 button {{ padding:.6rem 1rem; }}
+small {{ color:#666; }}
 </style></head>
 <body>
 <h1>Maharishi Mission Agents</h1>
-<form method="post">
+<small>If preview opens /preview, this app supports it directly.</small>
+<form method="post" action="/">
 <label>Agent</label>
 <select name="agent"><option value="all">all</option>{options}</select>
 <label>Request ID</label><input name="request_id" value="WEB-REQ-001"/>
@@ -82,18 +87,21 @@ class AgentWebHandler(BaseHTTPRequestHandler):
         self.wfile.write(payload)
 
     def do_GET(self) -> None:
-        if self.path == "/health":
+        path = urlparse(self.path).path
+        if path == "/health":
             self._send(200, '{"status":"ok"}', "application/json")
             return
-        if self.path == "/":
+        if path in HOME_PATHS:
             self._send(200, render_page())
             return
-        self._send(404, "Not Found", "text/plain")
+        self._send(404, "Not Found. Try / or /preview", "text/plain")
 
     def do_POST(self) -> None:
-        if self.path != "/":
-            self._send(404, "Not Found", "text/plain")
+        path = urlparse(self.path).path
+        if path not in HOME_PATHS:
+            self._send(404, "Not Found. Submit form to /", "text/plain")
             return
+
         length = int(self.headers.get("Content-Length", "0"))
         raw = self.rfile.read(length).decode("utf-8")
         form = parse_qs(raw)
@@ -116,4 +124,6 @@ def run_server(host: str = "0.0.0.0", port: int = 8000) -> None:
 
 
 if __name__ == "__main__":
-    run_server()
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    run_server(host=host, port=port)
