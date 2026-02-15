@@ -1,0 +1,16 @@
+{
+  "request_id": "REQ-001",
+  "date": "2026-02-15",
+  "requested_by": "Program Lead",
+  "agent": "operations",
+  "priority": "High",
+  "goal": "Prepare weekly execution plan",
+  "context": "Two community programs running in parallel",
+  "constraints": "Small volunteer team, bilingual communication needed",
+  "structured_data": "Task: finalize schedule; Owner: Ravi; Due: Friday",
+  "unstructured_notes": "Need tighter tracking of blockers and delayed tasks",
+  "output_format": "checklist",
+  "contains_health_data": false,
+  "external_communication": true,
+  "needs_supervisor_approval": true
+}
