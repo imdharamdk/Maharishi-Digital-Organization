@@ -77,3 +77,24 @@ pip install -r requirements.txt
 PORT=8000 python app.py
 ```
 Open: `http://localhost:8000` (or `/preview` path if your preview tool uses it).
+
+## Static Website (Netlify Ready)
+This repository now includes a deployable static website in `web/` built with plain **HTML, CSS, and JavaScript**.
+
+### Local preview
+```bash
+cd web
+python -m http.server 8080
+```
+Open `http://localhost:8080`.
+
+### Deploy to Netlify
+1. Push this repository to GitHub.
+2. In Netlify, choose **Add new site → Import an existing project**.
+3. Select this repository.
+4. Build settings are already configured via `netlify.toml`:
+   - Publish directory: `web`
+   - Build command: `echo 'Static site ready for deployment'`
+5. Deploy.
+
+The volunteer form uses Netlify Forms (`data-netlify="true"`) and works after the first production deploy.

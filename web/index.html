@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Maharishi Digital Organization: Ayurveda, Yoga, Healthcare, and Education initiatives powered by technology." />
+  <title>Maharishi Digital Organization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header" id="home">
+    <nav class="nav container">
+      <a href="#home" class="logo">Maharishi<span>Digital</span></a>
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#volunteer">Volunteer</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+
+    <section class="hero container">
+      <div>
+        <p class="pill">AI + Service + Tradition</p>
+        <h1>Transforming Lives Through Ayurveda, Yoga, Healthcare, and Education</h1>
+        <p class="hero-text">A modern nonprofit platform for outreach, learning, and wellbeing programs—built to scale globally and deploy easily on Netlify.</p>
+        <div class="hero-cta">
+          <a href="#programs" class="btn btn-primary">Explore Programs</a>
+          <a href="#volunteer" class="btn btn-secondary">Become a Volunteer</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Quick Stats</h3>
+        <ul>
+          <li><strong>4</strong> Mission Domains</li>
+          <li><strong>90-Day</strong> Execution Blueprint</li>
+          <li><strong>100%</strong> Static Site (Netlify Ready)</li>
+        </ul>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="about" class="section container">
+      <h2>Vision & Mission</h2>
+      <p>Our vision is to build a sustainable and harmonious society by integrating Vedic principles with modern science and digital tools. We empower communities through preventive wellness, educational access, and free healthcare initiatives.</p>
+    </section>
+
+    <section id="programs" class="section container">
+      <div class="section-head">
+        <h2>Core Programs</h2>
+        <div class="filters" role="group" aria-label="Program filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="wellness">Wellness</button>
+          <button class="filter-btn" data-filter="care">Healthcare</button>
+          <button class="filter-btn" data-filter="learning">Education</button>
+        </div>
+      </div>
+
+      <div class="cards" id="programCards">
+        <article class="card" data-category="wellness">
+          <h3>Ayurveda Resources</h3>
+          <p>Evidence-informed Ayurveda content, local language material, and practical lifestyle guides.</p>
+        </article>
+        <article class="card" data-category="wellness">
+          <h3>Yoga Programs</h3>
+          <p>Personalized sessions for stress management, mobility, and holistic wellbeing across age groups.</p>
+        </article>
+        <article class="card" data-category="care">
+          <h3>Free Healthcare Camps</h3>
+          <p>Volunteer-driven outreach camps with screening, follow-ups, and community health awareness.</p>
+        </article>
+        <article class="card" data-category="learning">
+          <h3>Digital Education</h3>
+          <p>Foundational learning tracks, digital literacy, and multilingual educational support for underserved communities.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="impact" class="section section-highlight">
+      <div class="container">
+        <h2>Impact Roadmap</h2>
+        <div class="timeline">
+          <div>
+            <h4>Days 1–30</h4>
+            <p>Collect SOPs, clean data, and define KPI dashboards.</p>
+          </div>
+          <div>
+            <h4>Days 31–60</h4>
+            <p>Launch pilot AI-supported operations and education workflows.</p>
+          </div>
+          <div>
+            <h4>Days 61–90</h4>
+            <p>Expand to healthcare and yoga agents with analytics and training.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="volunteer" class="section container">
+      <h2>Volunteer Sign-Up</h2>
+      <form class="volunteer-form" id="volunteerForm" name="volunteer" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="volunteer" />
+        <label>
+          Full Name
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Area of Interest
+          <select name="interest" required>
+            <option value="">Select one</option>
+            <option>Ayurveda</option>
+            <option>Yoga</option>
+            <option>Healthcare Camps</option>
+            <option>Education Programs</option>
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="4" placeholder="Tell us how you'd like to contribute"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <p class="form-note" id="formNote" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Maharishi Digital Organization • Built for Netlify deployment.</p>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
